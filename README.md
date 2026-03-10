@@ -1,69 +1,93 @@
-## Foundry
+Foundry Fund Me (F23 Edition)
+这是基于 Cyfrin Updraft 的 Foundry 全栈开发课程完成的众筹智能合约项目。该项目展示了如何使用 Solidity 编写去中心化资金募集合约，并利用 Foundry 工具链进行测试、部署和交互。
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+📖 项目简介
+FundMe 是一个去中心化众筹合约，主要功能包括：
 
-Foundry consists of:
+资金募集：用户可以发送 ETH，但必须满足最低美元价值（通过 Chainlink 预言机实时换算）。
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+价格转换：使用 Chainlink Price Feeds 获取 ETH/USD 的最新价格。
 
-## Documentation
+资金提取：只有合约所有者（Owner）可以提取合约中的全部资金。
 
-https://book.getfoundry.sh/
+高效存储：通过 constant 和 immutable 关键字以及合理的变量命名优化 Gas。
 
-## Usage
+🛠 技术栈
+Solidity: 智能合约语言
 
-### Build
+Foundry: 强大的以太坊开发框架（Forge, Cast, Anvil）
 
-```shell
-$ forge build
-```
+Chainlink: 提供去中心化预言机价格喂送
 
-### Test
+Make: 使用 Makefile 简化常用命令
 
-```shell
-$ forge test
-```
+🚀 快速开始
+前置要求
+确保你已安装以下工具：
 
-### Format
+Git
 
-```shell
-$ forge fmt
-```
+Foundry
 
-### Gas Snapshots
+1. 克隆仓库
+Bash
+git clone https://github.com/Monster-Three/foundry-fundme-f23.git
+cd foundry-fundme-f23
+2. 安装依赖
+Bash
+forge install
+3. 编译项目
+Bash
+forge build
+🧪 测试
+本项目包含单元测试和集成测试，并支持在不同网络（Anvil 模拟环境或真实分叉网络）上运行。
 
-```shell
-$ forge snapshot
-```
+运行本地测试:
 
-### Anvil
+Bash
+forge test
+查看测试覆盖率:
 
-```shell
-$ anvil
-```
+Bash
+forge coverage
+Gas 报告:
 
-### Deploy
+Bash
+forge snapshot
+🚢 部署与交互
+本地部署 (Anvil)
+启动本地节点:
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+Bash
+anvil
+运行部署脚本:
 
-### Cast
+Bash
+forge script script/DeployFundMe.s.sol --rpc-url http://127.0.0.1:8545 --broadcast --private-key <YOUR_PRIVATE_KEY>
+Makefile 命令 (推荐)
+如果你配置了 .env 文件（参考 .env.example），可以使用 Makefile 简化操作：
 
-```shell
-$ cast <subcommand>
-```
+部署到 Sepolia: make deploy ARGS="--network sepolia"
 
-### Help
+资金注入: make fund
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
-# About
+提取资金: make withdraw
 
-This is a crowd sourcing app!
+📁 目录结构
+Plaintext
+.
+├── src/                # 智能合约源代码 (FundMe.sol, PriceConverter.sol)
+├── script/             # 部署和交互脚本
+├── test/               # 测试文件 (单元测试与集成测试)
+├── lib/                # 外部库依赖 (chainlink-brownie-contracts等)
+├── Makefile            # 快捷命令配置
+└── foundry.toml        # Foundry 配置文件
+🛡 安全与优化
+使用 revert 自定义错误以节省 Gas。
+
+遵循 Solidity 样式指南进行变量命名（如 s_ 前缀表示状态变量）。
+
+构造函数中动态配置 Chainlink Price Feed 地址，增强合约的跨链兼容性。
+
+🤝 致谢
+感谢 Patrick Collins 及其团队提供的优质课程。
