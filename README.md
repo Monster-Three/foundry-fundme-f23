@@ -1,4 +1,101 @@
-Foundry Fund Me (F23 Edition)
+Foundry Fund Me (English README)
+This is a decentralized crowdfunding smart contract project developed as part of the Cyfrin Updraft Foundry Full Stack Development course. It demonstrates how to build, test, and deploy production-ready smart contracts using the Foundry toolchain and Chainlink oracles.
+
+📖 Overview
+The FundMe contract allows users to contribute funds (ETH) to a project, ensuring a minimum USD value is met using real-time price feeds.
+
+Key Features
+Decentralized Funding: Users can send ETH to the contract.
+
+Oracle Integration: Uses Chainlink Price Feeds to convert ETH to USD on-chain.
+
+Owner Privileges: Only the contract owner can withdraw the collected funds.
+
+Gas Optimized: Implements constant and immutable variables, along with custom errors to minimize gas costs.
+
+Multi-Chain Compatibility: Dynamically selects the correct Price Feed address based on the network (Sepolia, Mainnet, or local Anvil).
+
+🛠 Tech Stack
+Solidity: Smart contract logic.
+
+Foundry: Development framework (Forge for testing, Cast for interaction, Anvil for local node).
+
+Chainlink: Decentralized oracles for real-world data.
+
+Make: Task automation via Makefile.
+
+🚀 Quick Start
+Prerequisites
+Ensure you have the following installed:
+
+Git
+
+Foundry
+
+1. Clone the Repository
+git clone https://github.com/Monster-Three/foundry-fundme-f23.git
+cd foundry-fundme-f23
+
+2. Install Dependencies
+forge install
+
+3. Build the Project
+forge build
+
+🧪 Testing
+This project includes unit tests, integration tests, and staged deployments.
+
+Run All Tests:
+
+forge test
+Test Forked Mainnet (requires an RPC URL):
+
+forge test --fork-url $SEPOLIA_RPC_URL
+Check Test Coverage:
+
+forge coverage
+Gas Snapshots:
+
+forge snapshot
+
+🚢 Deployment & Usage
+Local Deployment (Anvil)
+Start the local node:
+
+anvil
+Deploy the contract:
+
+forge script script/DeployFundMe.s.sol --rpc-url http://127.0.0.1:8545 --broadcast --private-key <YOUR_PRIVATE_KEY>
+Using Makefile (Recommended)
+If you have a .env file configured, you can use the following shortcuts:
+
+Deploy to Sepolia: make deploy ARGS="--network sepolia"
+
+Fund the Contract: make fund
+
+Withdraw Funds: make withdraw
+
+📁 Project Structure
+Plaintext
+.
+├── src/                # Core Smart Contracts (FundMe.sol, PriceConverter.sol)
+├── script/             # Deployment and Interaction Scripts
+├── test/               # Unit and Integration Tests
+├── lib/                # External Libraries (Chainlink, etc.)
+├── Makefile            # Automation Shortcuts
+└── foundry.toml        # Foundry Configuration
+
+🛡 Security & Best Practices
+Custom Errors: Uses error FundMe__NotOwner() instead of long strings to save gas.
+
+Input Validation: Strict checks for minimum funding amounts.
+
+Mocking: Includes MockV3Aggregator for testing on local networks without live oracles.
+
+🤝 Acknowledgments
+Special thanks to Patrick Collins and the Cyfrin team for the incredible educational resources.
+
+Foundry Fund Me (中文 README)
 这是基于 Cyfrin Updraft 的 Foundry 全栈开发课程完成的众筹智能合约项目。该项目展示了如何使用 Solidity 编写去中心化资金募集合约，并利用 Foundry 工具链进行测试、部署和交互。
 
 📖 项目简介
@@ -33,10 +130,10 @@ Foundry
 git clone https://github.com/Monster-Three/foundry-fundme-f23.git
 cd foundry-fundme-f23
 
-2. 安装依赖
+1. 安装依赖
 forge install
 
-3. 编译项目
+1. 编译项目
 forge build
 
 🧪 测试
