@@ -33,37 +33,40 @@ Foundry
 Bash
 git clone https://github.com/Monster-Three/foundry-fundme-f23.git
 cd foundry-fundme-f23
+
 2. 安装依赖
 Bash
 forge install
+
 3. 编译项目
 Bash
 forge build
+
 🧪 测试
 本项目包含单元测试和集成测试，并支持在不同网络（Anvil 模拟环境或真实分叉网络）上运行。
 
 运行本地测试:
-
 Bash
 forge test
-查看测试覆盖率:
 
+查看测试覆盖率:
 Bash
 forge coverage
-Gas 报告:
 
+Gas 报告:
 Bash
 forge snapshot
+
 🚢 部署与交互
 本地部署 (Anvil)
 启动本地节点:
-
 Bash
 anvil
-运行部署脚本:
 
+运行部署脚本:
 Bash
 forge script script/DeployFundMe.s.sol --rpc-url http://127.0.0.1:8545 --broadcast --private-key <YOUR_PRIVATE_KEY>
+
 Makefile 命令 (推荐)
 如果你配置了 .env 文件（参考 .env.example），可以使用 Makefile 简化操作：
 
@@ -82,6 +85,7 @@ Plaintext
 ├── lib/                # 外部库依赖 (chainlink-brownie-contracts等)
 ├── Makefile            # 快捷命令配置
 └── foundry.toml        # Foundry 配置文件
+
 🛡 安全与优化
 使用 revert 自定义错误以节省 Gas。
 
